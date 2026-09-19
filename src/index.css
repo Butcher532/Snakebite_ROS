@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas-base: var(--app-canvas-base, #0B0F14);
+  --color-surface: var(--app-surface, #0e141d);
+  --color-surface-secondary: var(--app-surface-secondary, #161D27);
+  --color-surface-elevated: var(--app-surface-elevated, #1B2430);
+  --color-surface-bright: var(--app-surface-bright, #343944);
+  --color-surface-container: var(--app-surface-container, #1a2029);
+  --color-surface-container-low: var(--app-surface-container-low, #161c25);
+  --color-surface-container-high: var(--app-surface-container-high, #242a34);
+  --color-surface-container-highest: var(--app-surface-container-highest, #2f353f);
+  --color-surface-container-lowest: var(--app-surface-container-lowest, #080e17);
+  --color-border-subtle: var(--app-border-subtle, #26313D);
+  --color-text-primary: var(--app-text-primary, #F4F7FA);
+  --color-text-secondary: var(--app-text-secondary, #A8B3C2);
+  --color-text-muted: var(--app-text-muted, #6F7B89);
+  --color-primary: var(--app-primary, #b2c5ff);
+  --color-primary-container: var(--app-primary-container, #5b8cff);
+  --color-on-primary: var(--app-on-primary, #002c72);
+  --color-on-primary-container: var(--app-on-primary-container, #002665);
+  --color-primary-fixed: var(--app-primary, #b2c5ff);
+  --color-primary-fixed-dim: var(--app-primary, #b2c5ff);
+  --color-secondary: var(--app-secondary, #59d6f7);
+  --color-secondary-container: var(--app-secondary-container, #00a7c6);
+  --color-tertiary: var(--app-tertiary, #47dfa4);
+  --color-tertiary-container: var(--app-tertiary-container, #00a574);
+  --color-on-tertiary-container: var(--app-on-tertiary-container, #003120);
+  --color-status-critical: var(--app-status-critical, #FF5C6C);
+  --color-status-warning: var(--app-status-warning, #F5B942);
+  --color-on-surface: var(--app-text-primary, #dde2f0);
+
+  --radius-card: var(--app-card-radius, 12px);
+  --radius-btn: var(--app-button-radius, 8px);
+  --radius-badge: var(--app-badge-radius, 9999px);
+
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 0.75rem;
+  --spacing-space-lg: 1rem;
+  --spacing-space-xl: 1.5rem;
+  --spacing-margin: 1.5rem;
+  --spacing-margin-mobile: 1rem;
+  --spacing-gutter: 1rem;
+  --spacing-gutter-lg: 1.5rem;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-canvas-base);
+    color: var(--color-on-surface);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-canvas-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-surface-bright);
+}

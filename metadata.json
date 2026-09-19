@@ -1,0 +1,6 @@
+{
+  "name": "CarePath Operations Command",
+  "description": "Clinical emergency operations command and autonomous pathway routing system for acute envenomation response.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
