@@ -13,17 +13,32 @@ export const Header: React.FC = () => {
     isMockMode,
     currentTheme,
     setIsThemeModalOpen,
+    isSidebarOpen,
+    toggleSidebar,
   } = useCarePath();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showIncidentPicker, setShowIncidentPicker] = useState(false);
   const [showApiModal, setShowApiModal] = useState(false);
 
   return (
-    <header className="fixed top-0 left-64 right-0 h-16 bg-surface-secondary/90 backdrop-blur-xl border-b border-border-subtle z-40 px-space-lg flex items-center justify-between">
+    <header className="w-full h-16 bg-surface-secondary/90 backdrop-blur-xl border-b border-border-subtle z-30 px-space-md sm:px-space-lg flex items-center justify-between shrink-0">
       {/* Left Info & Status */}
-      <div className="flex items-center gap-space-md">
+      <div className="flex items-center gap-space-sm sm:gap-space-md min-w-0">
+        {/* Sidebar Open/Collapse Toggle Button */}
+        <button
+          id="header-sidebar-toggle-btn"
+          onClick={toggleSidebar}
+          className="p-2 rounded-lg bg-surface-elevated hover:bg-surface-bright text-text-secondary hover:text-text-primary border border-border-subtle transition-colors cursor-pointer flex items-center justify-center shrink-0"
+          title={isSidebarOpen ? 'Collapse sidebar (press [)' : 'Expand sidebar (press [)'}
+          aria-label={isSidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+        >
+          <span className="material-symbols-outlined text-[20px]">
+            {isSidebarOpen ? 'menu_open' : 'menu'}
+          </span>
+        </button>
+
         {/* Active Route Breadcrumb */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 min-w-0">
           <span className="text-[12px] font-mono text-text-muted hidden sm:inline">CarePath</span>
           <span className="text-[12px] text-text-muted hidden sm:inline">/</span>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-elevated border border-border-subtle shadow-sm">

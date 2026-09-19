@@ -211,8 +211,8 @@ The `apiClient` manages HTTP requests (`GET`, `POST`, `PUT`, `DELETE`). It conta
 
 | Component | File Path | Purpose |
 | :--- | :--- | :--- |
-| **`Sidebar`** | `src/components/common/Sidebar.tsx` | Main navigation, active incident snapshot, theme launcher, simulation triggers, and API toggle. |
-| **`Header`** | `src/components/common/Header.tsx` | Breadcrumbs, system clock, incident picker, notification center, theme selector, and API inspector. |
+| **`Sidebar`** | `src/components/common/Sidebar.tsx` | Main navigation, incident snapshot, theme launcher, simulation triggers, API toggle, and collapsible drawer with close triggers (`[`) and mobile backdrop overlay. |
+| **`Header`** | `src/components/common/Header.tsx` | Breadcrumbs, sidebar hamburger/collapse toggle (`[`), system clock, incident picker, notifications, theme selector, and API inspector. |
 | **`OperationsDashboard`** | `src/components/dashboard/OperationsDashboard.tsx` | Command console with KPI cards, pathway timeline, receiving hospital readiness, and telemetry. |
 | **`TacticalMap`** | `src/components/dashboard/TacticalMap.tsx` | Vector SVG map rendering real-time route gradients, terrain contours, and GPS waypoint markers. |
 | **`CarePathLive`** | `src/components/live/CarePathLive.tsx` | High-resolution satellite tracking view with live sensor gateway and handoff generation. |

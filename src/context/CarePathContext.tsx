@@ -40,6 +40,9 @@ interface CarePathContextType {
   setThemeById: (id: ThemePreset['id']) => void;
   isThemeModalOpen: boolean;
   setIsThemeModalOpen: (open: boolean) => void;
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: (open: boolean | ((prev: boolean) => boolean)) => void;
+  toggleSidebar: () => void;
   isMockMode: boolean;
   setIsMockMode: (mock: boolean) => void;
   incident: Incident;
@@ -92,6 +95,46 @@ export const CarePathProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [activeTab, setActiveTabState] = useState<NavigationTab>(getInitialTab);
   const [themeId, setThemeId] = useState<ThemePreset['id']>(getInitialThemeId);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState<boolean>(false);
+  const [isSidebarOpen, setIsSidebarOpenState] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('carepath_sidebar_open');
+      if (saved !== null) {
+        return saved === 'true';
+      }
+      return window.innerWidth >= 1024;
+    }
+    return true;
+  });
+
+  const setIsSidebarOpen = useCallback((action: boolean | ((prev: boolean) => boolean)) => {
+    setIsSidebarOpenState((prev) => {
+      const next = typeof action === 'function' ? action(prev) : action;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('carepath_sidebar_open', String(next));
+      }
+      return next;
+    });
+  }, []);
+
+  const toggleSidebar = useCallback(() => {
+    setIsSidebarOpen((prev) => !prev);
+  }, [setIsSidebarOpen]);
+
+  // Keyboard shortcut listener: press '[' or 'Ctrl+B' / 'Cmd+B' to toggle sidebar
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) {
+        return;
+      }
+      if (e.key === '[' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b')) {
+        e.preventDefault();
+        toggleSidebar();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [toggleSidebar]);
+
   const [isMockMode, setIsMockModeState] = useState<boolean>(apiClient.isUsingMock());
   const [incident, setIncident] = useState<Incident>(INCIDENT_SB_1042);
   const [ambulance, setAmbulance] = useState<AmbulanceUnit>(AMBULANCE_17);
@@ -363,6 +406,9 @@ export const CarePathProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setThemeById,
         isThemeModalOpen,
         setIsThemeModalOpen,
+        isSidebarOpen,
+        setIsSidebarOpen,
+        toggleSidebar,
         isMockMode,
         setIsMockMode,
         incident,
